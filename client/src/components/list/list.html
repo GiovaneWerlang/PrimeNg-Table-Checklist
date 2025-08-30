@@ -1,0 +1,27 @@
+<div class="card">
+    <p-table #dt [value]="products" [(selection)]="selectedProducts" [selectionPageOnly]="true" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" dataKey="id" [rowHover]="true" [rows]="10"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10]" [loading]="loading" [paginator]="false">
+        <ng-template #header>
+            <tr>
+                <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
+                <th pResizableColumn>Code</th>
+                <th pResizableColumn>Name</th>
+                <th pResizableColumn>Category</th>
+                <th pResizableColumn>Quantity</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-product>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="product" />
+                </td>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.quantity }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="total" [rowsPerPageOptions]="[10]" />
+    <li *ngFor="let sel of selectedProducts">{{sel?.id}}</li>
+</div>
